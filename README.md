@@ -10,8 +10,9 @@ You are willing to sacrifice speed to avoid depending on yet another R package.
 Drop `IVH` somewhere in your codebase. Hash with `IVH$hash(raw_serialized_data)`.
 
 # Alternatives
-If you're not willing to take an extra dependency, serialize your data, write it to a temporary file and hash it
-with `tools::md5sum()`.
+If you're OK with using a cryptographic hash function and have access to R >= 4.5.0, use `tools::md5sum()` or
+`tools::sha256sum()`. If you need to support R < 4.5.0 you can still use `tools::md5sum()`, but you first have to write
+your data to a temporary file and then use its path as the argument to that function.
 
 If you can live with an extra dependency, maybe pick one implementation of the popular XXH128:
 - xxhashlite: `xxhashlite::xxhash_raw(input, algo = 'xxh128')`. The fastest of the three.
